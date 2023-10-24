@@ -50,6 +50,7 @@ return require("packer").startup(function(use)
 
     -- LSP
     use({
+	"williamboman/nvim-lsp-installer",
         "neovim/nvim-lspconfig",
         config = function()
             require("configs.lsp")
@@ -58,10 +59,12 @@ return require("packer").startup(function(use)
 
     use("onsails/lspkind-nvim")
     use({
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        tag = "v<CurrentMajor>.*",
-    })
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!:).
+	run = "make install_jsregexp"
+})
 
     -- cmp: Autocomplete
     use({
@@ -154,22 +157,5 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- Background Transparent
-    use({
-        "xiyaowong/nvim-transparent",
-        config = function()
-            require("transparent").setup({
-                enable = true,
-                extra_groups = {
-                    "BufferLineTabClose",
-                    "BufferlineBufferSelected",
-                    "BufferLineFill",
-                    "BufferLineBackground",
-                    "BufferLineSeparator",
-                    "BufferLineIndicatorSelected",
-                },
-                exclude = {},
-            })
-        end,
-    })
+    
 end)
